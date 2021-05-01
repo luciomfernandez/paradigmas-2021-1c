@@ -89,4 +89,20 @@ term :: Int -> [a] -> a
 term 0 l = head l
 term i (x:xs) = term (i-1) xs
 
+rev :: [a] -> [a]
+rev [] = []
+rev (x:xs) = appendUno (rev xs) x
+
+maxl :: [Int] -> Int
+maxl [x] = x
+maxl (x:xs) = if x >= maxl xs then x else maxl xs
+
+cuenta ::  Eq a => a -> [a] -> Int
+cuenta a [] = 0
+cuenta a (x:xs) = if a==x then 1 + cuenta a xs else cuenta a xs
+
+repite :: a -> Int -> [a]
+repite a 0 = []
+repite a n = a:repite a (n-1)
+
 
