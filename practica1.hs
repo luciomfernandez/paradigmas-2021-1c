@@ -110,3 +110,30 @@ repite a n = a:repite a (n-1)
 --
 (@@) :: Int -> Int -> [Int]
 desde @@ hasta = if desde == hasta then [desde] else desde: ((desde+1) @@ hasta)
+
+multiplicaTodos :: [Int] -> Int
+multiplicaTodos (x:[]) = x
+multiplicaTodos (x:xs) = x * multiplicaTodos xs
+
+factorial2 :: Int -> Int
+factorial2 0 = 1
+factorial2 n = multiplicaTodos(1 @@ n)
+
+--7)
+ultimoExplicito :: [a] -> a
+ultimoExplicito (x:[]) = x
+ultimoExplicito (x:xs) =ultimoExplicito xs
+
+ultimoImplicito :: [a] -> a
+ultimoImplicito l = ultimoExplicito l
+
+sacarUltimoExplicito :: [a] -> [a]
+sacarUltimoExplicito (x:[]) = []
+sacarUltimoExplicito (x:xs) = x:sacarUltimoExplicito xs
+
+--8)
+--
+capicua :: Eq a => [a] -> Bool
+capicua (x:[])= True
+capicua (x:xs) = x == ultimoExplicito (x:xs) && capicua(sacarUltimoExplicito xs)
+
