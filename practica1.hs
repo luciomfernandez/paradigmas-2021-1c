@@ -106,3 +106,7 @@ repite a 0 = []
 repite a n = a:repite a (n-1)
 
 
+--6)
+--
+(@@) :: Int -> Int -> [Int]
+desde @@ hasta = if desde == hasta then [desde] else desde: ((desde+1) @@ hasta)
