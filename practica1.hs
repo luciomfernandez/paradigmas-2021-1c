@@ -183,3 +183,16 @@ dexAHex x = if (div x 16) < 16 then
               mapear(div x 16):mapear(mod x 16):[]
             else
               appendUno (dexAHex (div x 16)) (mapear(mod x 16))
+
+
+--12) al segundo parametro se le pasa el primero menos 1 para no contarse a si mismo como divisor
+divisores :: Int -> Int -> [Int]
+divisores x 0 = []
+divisores x y = if mod x y == 0 then y:divisores x (y-1) else divisores x (y-1)
+
+perfecto :: Int -> Bool
+perfecto x = x == sum (divisores x (x-1))
+
+
+
+
