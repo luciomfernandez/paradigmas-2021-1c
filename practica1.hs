@@ -137,3 +137,49 @@ capicua :: Eq a => [a] -> Bool
 capicua (x:[])= True
 capicua (x:xs) = x == ultimoExplicito (x:xs) && capicua(sacarUltimoExplicito xs)
 
+
+--9)
+flat :: [[a]] -> [a]
+flat [] = []
+flat (xs:xss) = append xs (flat xss)
+
+longLl :: [[a]] -> Int
+longLl xss = long (flat xss)
+
+--10)
+intercalar :: [a]->[a]->[a]
+intercalar xs [] = xs
+intercalar [] ys = ys
+intercalar (x:xs) (y:ys) = x:y:intercalar xs ys
+
+aparear :: [Int] -> [Int] -> [Int]
+aparear xs [] = xs
+aparear [] ys = ys
+aparear (x:xs) (y:ys) = if x<=y then x:aparear xs (y:ys) else y:aparear (x:xs) ys 
+
+--11)
+--
+mapear :: Int -> Char
+mapear x
+  |x==0='0'
+  |x==1='1'
+  |x==2='2'
+  |x==3='3'
+  |x==4='4'
+  |x==5='5'
+  |x==6='6'
+  |x==7='7'
+  |x==8='8'
+  |x==9='9'
+  |x==10='A'
+  |x==11='B'
+  |x==12='C'
+  |x==13='D'
+  |x==14='E'
+  |otherwise='F'
+
+dexAHex :: Int -> String
+dexAHex x = if (div x 16) < 16 then
+              mapear(div x 16):mapear(mod x 16):[]
+            else
+              appendUno (dexAHex (div x 16)) (mapear(mod x 16))
