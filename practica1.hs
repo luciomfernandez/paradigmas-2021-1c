@@ -193,6 +193,15 @@ divisores x y = if mod x y == 0 then y:divisores x (y-1) else divisores x (y-1)
 perfecto :: Int -> Bool
 perfecto x = x == sum (divisores x (x-1))
 
+--13)
+esPrefija :: Eq a => [a] -> [a] -> Bool
+esPrefija [] ys = True
+esPrefija xs [] = False
+esPrefija (x:xs) (y:ys) = x == y && esPrefija xs ys
 
+posicion2 :: Eq a => [a]->[a]->Int
+posicion2 xs [] = -1
 
+posicion :: ([a],[a])->Int
+posicion xs ys = posicion2(xs,ys,0)
 
