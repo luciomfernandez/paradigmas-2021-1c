@@ -55,3 +55,19 @@ appendCond2 xs f = foldr (\x acc -> if cumpleCond f x then x++acc else acc) [] x
 appendCond2T::[[a]] -> Int-> (a -> Bool) -> [a]
 appendCond2T xs t f = foldr (\x acc -> if cumpleCond f x t then x++acc else acc) [] xs
   where cumpleCond fun ys tol=  length(filter fun ys) >= tol
+
+
+--31)
+--i)
+foldr2 :: (a -> b -> b) -> b -> [a] -> b
+foldr2 f acc [] = acc
+foldr2 f acc (x:xs) = f x (foldr2 f acc xs)
+
+foldr3 :: (a -> b -> b) -> b -> [a]->b
+foldr3 f acc xs = foldl (flip f) acc (reverse xs)  --Preguntar si esta bien lo del flip
+
+--ii)
+ 
+
+
+
