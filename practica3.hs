@@ -59,15 +59,30 @@ appendCond2T xs t f = foldr (\x acc -> if cumpleCond f x t then x++acc else acc)
 
 --31)
 --i)
-foldr2 :: (a -> b -> b) -> b -> [a] -> b
-foldr2 f acc [] = acc
-foldr2 f acc (x:xs) = f x (foldr2 f acc xs)
+--foldr2 :: (a -> b -> b) -> b -> [a] -> b
+--foldr2 f acc [] = acc
+--foldr2 f acc (x:xs) = f x (foldr2 f acc xs)
 
-foldr3 :: (a -> b -> b) -> b -> [a]->b
-foldr3 f acc xs = foldl (flip f) acc (reverse xs)  --Preguntar si esta bien lo del flip
+--foldr3 :: (a -> b -> b) -> b -> [a]->b
+--foldr3 f acc xs = foldl (flip f) acc (reverse xs)  --Preguntar si esta bien lo del flip
 
---ii)
+--i)
+ordenada :: [a]-> (a->a->Bool) -> Bool
+ordenada xs f = foldrpar (\x y z-> (f x y) && z ) True xs
+
+
+foldrpar :: (a->a->b->b)->b->[a]->b
+foldrpar f x [y] = x
+foldrpar f x (y1:(y2:ys)) = f y1 y2 (foldrpar f x (y2:ys))
+
  
+--iii)
+llordenada :: [[a]] -> (a->a->Bool) -> Bool
+llordenada xss f = foldrpar (\x y z -> ordenadaAux x y z) True xss
+  where ordenadaAux [] ys z = ordenada ys f && z
+        ordenadaAux xs [] z = ordenada xs f&& z
+        ordenadaAux xs ys z = ordenada xs f && ordenada ys f && f (last xs) (head ys) && z
 
+ 
 
 
