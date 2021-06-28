@@ -36,6 +36,23 @@ filter2 (x:xs) f = if f x then (x:filter2 xs f) else filter2 xs f
 filter22 :: [a] -> (a -> Bool) -> [a]
 filter22 xs f = [x|x<-xs,f x]
 
+--29)
+--i)
+--
+cant :: (a->Bool) -> [a] ->Int
+cant f xs = foldr (\x y-> cumple f x y) 0 xs
+  where cumple fun valor acum = if fun valor then 1 + acum else acum
+
+cantConFoldl :: (a->Bool) -> [a] ->Int
+cantConFoldl f xs = foldl (\y x-> cumple f y x) 0 xs
+  where cumple fun acum valor = if fun valor then 1 + acum else acum
+
+
+--ii)
+--
+cantll :: (a->Bool) -> [[a]] -> Int
+cantll f xss = foldr (\xs acum-> chequea f xs acum) 0 xss
+  where chequea fun lista acumulador = cant fun lista + acumulador
 
 
 --30)
@@ -84,5 +101,10 @@ llordenada xss f = foldrpar (\x y z -> ordenadaAux x y z) True xss
         ordenadaAux xs ys z = ordenada xs f && ordenada ys f && f (last xs) (head ys) && z
 
  
+
+--32)
+--
+--foldrn :: ([a]->b->b) -> b -> [[a]] -> b
+--foldrn f x yss = foldr f  
 
 
